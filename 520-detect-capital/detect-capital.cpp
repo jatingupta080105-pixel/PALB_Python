@@ -1,18 +1,37 @@
 class Solution {
 public:
     bool detectCapitalUse(string word) {
-        int capital = 0;
-        for (char c : word) {
-            if (isupper(c))
-                capital++;
-        }
-        if (capital == word.length())
-            return true;
-        if (capital == 0)
-            return true;
-        if (capital == 1 && isupper(word[0]))
-            return true;
 
-        return false;
+    if(word.length() == 1)
+        return true;
+
+    if(isupper(word[0])) {
+
+        if(isupper(word[1])) {
+            for(int i = 2; i < word.length(); i++) {
+                if(islower(word[i])) {
+                    return false;
+                }
+            }
+        }
+        else {
+            for(int i = 1; i < word.length(); i++) {
+                if(isupper(word[i])) {
+                    return false;
+                }
+            }
+        }
+
+    }
+    else {
+
+        for(int i = 0; i < word.length(); i++) {
+            if(isupper(word[i])) {
+                return false;
+            }
+        }
+    }
+
+    return true;
     }
 };
